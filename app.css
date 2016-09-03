@@ -1,0 +1,89 @@
+body {
+	overflow-x: hidden;
+}
+
+.topgit-toolbar {
+  background-color:white !important; 
+  border:1px solid; 
+  border-color:black; 
+  width:100%;
+}
+
+.topgit-nosearch-quote {
+  font-weight: 300;
+  padding-top: 20px;
+  color: grey;
+}
+
+.topgit-icon {
+  height:50px; 
+  width:50px;
+  margin-right: 10px;
+}
+
+.topgit-heading {
+  font-size: 32px !important;
+  font-weight: 400 !important;
+  padding-right: 10px;
+  color: #478965;
+}
+
+.topgit-subheading {
+  font-size: 18px !important;
+  font-weight: 300 !important;
+  color: #7ebd34;
+}
+
+.topgit-searchcontainer {
+  position: relative;
+  top: 30px;
+  left: 2%;
+}
+
+.topgit-spinner {
+  margin-top: 30px;
+}
+
+.topgit-repo-container {
+  margin-top: 30px;
+  width: 100%;
+  background-color:#e0edd5;
+}
+
+.topgit-repo-title {
+  font-size: 24px !important;
+  font-weight: 300 !important; 
+}
+
+.topgit-language {
+  padding-right: 15px;
+}
+
+.topgit-info-border {
+  border:1px solid; 
+  padding-left:90px;
+  /*padding-right: 50px !important;*/
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-color: #478965;
+  border-radius: 20px;
+  color: #478965;
+  font-weight: 300;
+}
+
+.topgit-icon-star {
+  position:relative; 
+  top:40px; 
+  left:5%;
+}
+
+.topgit-rating {
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.topgit-toast {
+  color: red;
+  font-weight: 400;
+}

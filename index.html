@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html ng-app="topGit" ng-controller="topGitMainController">
+<head>
+	<title>TopGit</title>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" href="app.css">
+</head>
+<body>
+  <!-- Application toolbar -->
+  <md-toolbar class="topgit-toolbar">
+    <div class="md-toolbar-tools">
+      <img src="http://www.iconsdb.com/icons/preview/gray/github-10-xxl.png" class="topgit-icon" />
+      <h1 class="md-subhead topgit-heading">TopGit</h1>
+      <p class="md-subhead topgit-subheading"> - Finding the best github projects</p>
+    </div>
+  </md-toolbar>
+
+  <div layout="row">
+
+    <div flex="70" layout-align="start center" layout-wrap class="topgit-searchcontainer">
+      <!-- Search language autocomplete -->
+      <div layout="column" flex="50">
+        <md-autocomplete flex="100" md-selected-item="searchLanguageItem" md-search-text-change="searchLanguageChange(searchLanguage)" md-search-text="searchLanguage" md-items="language in languageSearch(searchLanguage)" md-item-text="language" placeholder="Search (by language)">
+          <md-item-template>
+            <span md-highlight-text="searchLanguage">{{ language }}</span>
+          </md-item-template>
+          <md-not-found>
+            No language matching "{{ searchLanguage }}" were found.
+          </md-not-found>
+        </md-autocomplete>
+      </div>
+
+      <div layout="column" flex="70">
+        <!-- Spinner -->
+        <div layout="row" layout-sm="column" layout-align="space-around" ng-if="spinnerFlag" class="topgit-spinner">
+          <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+
+        <h1 class="topgit-nosearch-quote" ng-if="!searchLanguageItem && !repos.length">Search for some language to get top repositories of that language</h1>
+        <!-- Top Github Repositories -->
+        <div layout="row" ng-if="repos.length" layout-wrap>
+          <div layout="column" ng-repeat="repo in repos" flex="100">  
+            <md-card class="topgit-repo-container">
+              <!-- Repository Heading -->
+              <md-card-title>
+                <md-card-title-text>
+                  <a target="_blank" ng-href="{{repo.owner.html_url}}" style="text-decoration:none;"><p class="md-subhead topgit-repo-title"> {{ repo.full_name }} </p></a>
+                </md-card-title-text>
+              </md-card-title>
+
+              <!-- Repository Content -->
+              <md-card-content>
+                <p class="md-subhead topgit-language">Language: {{ repo.language }}</p>
+                <p class="md-subhead"> | {{ repo.description }}</p>
+              </md-card-content>
+            </md-card> 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div flex="20" layout-wrap>
+      <div layout="column" ng-if="repos.length && searchLanguageItem">
+        <p class="md-subhead topgit-icon-star topgit-toast">We've found {{ totalCount }} repository results in {{ searchLanguageItem }}</p>
+      </div>
+
+      <div layout="column" ng-if="reposHeader">
+        <i class="material-icons topgit-icon-star">layers</i>
+        <h1 class="md-subhead topgit-info-border">Rate Limit</h1>
+        <md-card class="topgit-repo-container">
+          <h1 class="md-subhead topgit-rating"> {{ reposHeader['x-ratelimit-remaining'] }} out of {{ reposHeader['x-ratelimit-limit'] }} </h1>
+        </md-card>
+      </div>
+      <div layout="column">
+        <i class="material-icons topgit-icon-star">star</i>
+        <h1 class="md-subhead topgit-info-border">Stars</h1>
+        <p class="md-subhead">Range of stars is from 0 to 1000</p>
+        <md-slider md-discrete ng-model="stars" step="100" min="0" max="1000" aria-label="rating">
+        </md-slider>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+  <!-- Custom JS -->
+  <script type="text/javascript" src="app.js"></script>
+</body>
+</html>
